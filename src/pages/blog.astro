@@ -3,18 +3,16 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PostsList from '../components/PostsList.astro';
+import Main from '../components/Main.astro';
 
 const posts = await getCollection("blog");
 ---
 
 <Layout title="Cheemiya Blog">
-	<main class="px-24 w-full max-sm:px-4">
+	<Main>
 		<h1 class="font-bold text-lg">hi there i am a slot aka main blog</h1>
         {posts.map(post => (
-            // <a href={`/blog/${post.slug}`}>
-            //     <h2>{post.data.image}</h2>
-            // </a>
             <PostsList posts={posts}/>
         ))}
-	</main>
+	</Main>
 </Layout>
