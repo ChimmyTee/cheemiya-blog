@@ -1,19 +1,18 @@
 ---
-
-import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import PostsList from '../components/PostsList.astro';
-import Main from '../components/Main.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PostsList from "../components/PostsList.astro";
+import Main from "../components/Main.astro";
 
 const posts = await getCollection("blog");
 ---
 
 <Layout title="Cheemiya Blog">
-	<Main>
-		<h1 class="font-bold text-lg">hi there i am a slot aka main blog</h1>
-        <!-- {posts.map(post => (
+  <Main>
+    <h1>hi there i am a slot aka main blog</h1>
+    <!-- {posts.map(post => (
             <PostsList posts={posts}/>
         ))} -->
-        <PostsList posts={posts} />
-	</Main>
+    <PostsList posts={posts} />
+  </Main>
 </Layout>

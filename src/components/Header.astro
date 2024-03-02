@@ -1,6 +1,12 @@
+---
+import { Image } from 'astro:assets';
+import logo from "../images/logo.png";
+---
+
 <header>
     <a href="/" class="flex">
-        <img src="/goldshark.jpg" alt="shark logo"/>
+        <!-- <img src="/goldshark.jpg" alt="shark logo"/> -->
+        <Image src={logo} alt="Cheemiya Logo" loading="eager" width="200" height="100"/>
         <p>Cheemiya</p>
     </a>
 </header>
