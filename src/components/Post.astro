@@ -9,13 +9,13 @@ const { post } = Astro.props;
 
 ---
 
-<article>
+<article class="border border-black">
     <a href={`/blog/${post.slug}`} aria-label={`Read more about ${post.data.title}`}>
         <h1>Image Here</h1>
     </a>
 
     <div class="mb-4">
-        <h1>Catergories</h1>
+        <h1>Catergories:{post.data.categories.map((category) => category + " ")}</h1>
     </div>
 
     <a href={`/blog/${post.slug}`} class="text-4xl text-zinc-900 mb-4 font-semibold inline-block">
