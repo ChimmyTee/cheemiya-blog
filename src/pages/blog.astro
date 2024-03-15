@@ -2,9 +2,13 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import PostsList from "../components/PostsList.astro";
+import LifestylePostsList from "../components/LifestylePostsList.astro";
 import Main from "../components/Main.astro";
 
 const posts = await getCollection("blog");
+const lifestylePosts = await getCollection("blog", ({ id }) => {
+  return id.startsWith('food');
+});
 ---
 
 <Layout title="Cheemiya Blog">
@@ -13,6 +17,14 @@ const posts = await getCollection("blog");
     <!-- {posts.map(post => (
             <PostsList posts={posts}/>
         ))} -->
-    <PostsList posts={posts} />
+    
+    <details class="my-4">
+      <summary>Blog Posts</summary>
+      <PostsList posts={posts} />
+    </details>
+    <details class="my-4">
+      <summary>Lifestyle</summary>
+      <LifestylePostsList posts={lifestylePosts} />
+    </details>
   </Main>
 </Layout>

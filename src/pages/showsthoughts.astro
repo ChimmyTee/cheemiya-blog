@@ -1,0 +1,91 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PostsList from "../components/PostsList.astro";
+import Main from "../components/Main.astro";
+
+const posts = await getCollection("blog");
+
+// const musicPosts = await getCollection("blog", ({ id }) => {
+//   return id.startsWith('lifestyle');
+// });
+const musicPosts = await getCollection("blog", ({ data }) => {
+  return data.categories.includes("tag");
+});
+---
+
+<Layout title="Cheemiya Blog">
+  <Main>
+    <h1>Hi there I am Shows but I am test concepts</h1>
+    <details class="my-4">
+        <summary>Blog Posts</summary>
+        <PostsList posts={posts} />
+    </details>
+    {
+      musicPosts.map((post) => (
+        <article class="border border-white p-4">
+          <a
+            href={`/blog/${post.slug}`}
+            aria-label={`Read more about ${post.data.title}`}
+          ></a>
+
+          <div class="mb-4">
+            <h1>
+              Catergories:
+              {post.data.categories.map((category) => category + " ")}
+            </h1>
+          </div>
+
+          <a href={`/blog/${post.slug}`} class="text-3xl mb-4 inline-block">
+            {post.data.title}
+          </a>
+
+          <p class="text-xl mb-9 line-clamp-2 text-purple-dark">{post.body}</p>
+
+          <div class="flex justify-between items-center">
+            <h1>{post.data.author}</h1>
+            <span class="text-zinc-700 text-xl">{post.data.date}</span>
+          </div>
+        </article>
+      ))
+    }
+    <!-- {posts.map(post => (
+            <PostsList posts={posts}/>
+        ))} -->
+
+    <!-- <details class="my-4">
+      <summary>Blog Posts</summary>
+      <PostsList posts={posts} />
+    </details> -->
+    <!-- <div class="grid grid-cols-1">
+        {
+          posts.map((post) => (
+            <article class="border border-white p-4">
+              <a
+                href={`/blog/${post.slug}`}
+                aria-label={`Read more about ${post.data.title}`}
+              >
+              </a>
+      
+              <div class="mb-4">
+                <h1>
+                  Catergories:{post.data.categories.map((category) => category + " ")}
+                </h1>
+              </div>
+      
+              <a href={`/blog/${post.slug}`} class="text-3xl mb-4 inline-block">
+                {post.data.title}
+              </a>
+      
+              <p class="text-xl mb-9 line-clamp-2 text-purple-dark">{post.body}</p>
+      
+              <div class="flex justify-between items-center">
+                <h1>{post.data.author}</h1>
+                <span class="text-zinc-700 text-xl">{post.data.date}</span>
+              </div>
+            </article>
+          ))
+        }
+      </div> -->
+  </Main>
+</Layout>
